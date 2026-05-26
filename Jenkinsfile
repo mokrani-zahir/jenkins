@@ -68,7 +68,7 @@ pipeline {
         // ── Stage 2 : Compiler ───────────────────────
         stage('Build') {
             steps {
-                bat 'clean verify checkstyle:checkstyle pmd:pmd pmd:cpd spotbugs:spotbugs'
+                bat 'mvn clean verify checkstyle:checkstyle pmd:pmd pmd:cpd spotbugs:spotbugs'
                 // -B = batch mode (pas de couleurs, logs Jenkins-friendly)
             }
         }
