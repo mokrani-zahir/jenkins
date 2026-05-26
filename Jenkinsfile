@@ -1,4 +1,4 @@
-/**
+/** 
  * Jenkinsfile – Pipeline CI complète
  * Projet : Boutique en ligne – ICDE848
  *
