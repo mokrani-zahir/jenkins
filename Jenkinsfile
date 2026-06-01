@@ -131,7 +131,7 @@ pipeline {
                 // Se placer dans le dossier des tests Selenium
                 // (adapter le chemin selon où tu as mis tp-selenium)
                 dir('tp-selenium') {
-                    sh '''
+                    bat '''
                         pip install -r requirements.txt --quiet
                         python - m pytest tests/ \
                             -v \
