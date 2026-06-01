@@ -131,14 +131,10 @@ pipeline {
                 // Se placer dans le dossier des tests Selenium
                 // (adapter le chemin selon où tu as mis tp-selenium)
                 dir('tp-selenium') {
-                    bat '''
-                        pip install -r requirements.txt --quiet
-                        python - m pytest tests/ \
-                            -v \
-                            --junitxml=rapport-selenium.xml \
-                            --html=rapport-selenium.html \
-                            --self-contained-html
-                    '''
+
+                    bat 'pip install -r requirements.txt --quiet'
+
+                    bat 'python -m pytest tests/ -v --junitxml=rapport-selenium.xml --html=rapport-selenium.html --self-contained-html'
                 }
             }
             post {
