@@ -206,6 +206,12 @@ pipeline {
         // Toujours exécuté (succès ou échec)
         always {
             echo "Pipeline terminée — statut : ${currentBuild.currentResult}"
+
+            emailext(
+                subject: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body:    "Le build est de nouveau stable : ${env.BUILD_URL}",
+                to:      'equipe-dev@monentreprise.fr'
+            )
         }
 
         // Seulement en cas d'échec
