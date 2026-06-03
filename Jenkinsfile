@@ -36,7 +36,7 @@ pipeline {
     parameters {
         string(
             name:         'BRANCH',
-            defaultValue: 'main',
+            defaultValue: 'master',
             description:  'Branche Git à builder'
         )
         choice(
@@ -126,33 +126,33 @@ pipeline {
         }
 
         // ── Stage 7 : Tests UI Selenium ───────────────────────────
-        // stage('Tests UI Selenium') {
-        //     steps {
-        //         // Se placer dans le dossier des tests Selenium
-        //         // (adapter le chemin selon où tu as mis tp-selenium)
-        //         dir('tp-selenium') {
+        stage('Tests UI Selenium') {
+            steps {
+                // Se placer dans le dossier des tests Selenium
+                // (adapter le chemin selon où tu as mis tp-selenium)
+                dir('tp-selenium') {
 
-        //             bat 'pip install -r requirements.txt --quiet'
+                    bat 'pip install -r requirements.txt --quiet'
 
-        //             bat 'python -m pytest tests/ -v --junitxml=rapport-selenium.xml --html=rapport-selenium.html --self-contained-html'
-        //         }
-        //     }
-        //     post {
-        //         always {
-        //             // Publier les résultats dans Jenkins
-        //             junit 'tp-selenium/rapport-selenium.xml'
+                    bat 'python -m pytest tests/ -v --junitxml=rapport-selenium.xml --html=rapport-selenium.html --self-contained-html'
+                }
+            }
+            post {
+                always {
+                    // Publier les résultats dans Jenkins
+                    junit 'tp-selenium/rapport-selenium.xml'
 
-        //             // Archiver le rapport HTML
-        //             archiveArtifacts(
-        //                 artifacts: 'tp-selenium/rapport-selenium.html',
-        //                 allowEmptyArchive: true
-        //             )
-        //         }
-        //         failure {
-        //             echo 'Tests UI en échec — consulter rapport-selenium.html'
-        //         }
-        //     }
-        // }
+                    // Archiver le rapport HTML
+                    archiveArtifacts(
+                        artifacts: 'tp-selenium/rapport-selenium.html',
+                        allowEmptyArchive: true
+                    )
+                }
+                failure {
+                    echo 'Tests UI en échec — consulter rapport-selenium.html'
+                }
+            }
+        }
 
         // ── Stage 6 : Analyse qualité ─────────────────
         stage('Qualité') {
